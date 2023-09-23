@@ -1,0 +1,68 @@
+capacitor-google-map {
+    display: inline-block;
+    width: 100vw;
+    height: 100vh;
+}
+
+.title {
+    font-weight: 600;
+    color: #424242;
+}
+
+.stats {
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.stats-item {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stats-value {
+    font-weight: 600;
+    font-size: 20px;
+    background: linear-gradient(90deg, #6BEF8C 0%, #00B1D4 100%);
+    background: linear-gradient(90deg, color(display-p3 0.5608 0.9255 0.5882) 0%, color(display-p3 0.2196 0.6824 0.8157) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stats-title {
+    font-weight: 500;
+    font-size: 16px;
+    color: #424242;
+}
+
+.light-title {
+    color: rgba(66, 66, 66, .6);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.location {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 12px 0;
+}
+
+.location-name {
+    display: flex;
+    flex-direction: column;
+}
+
+.street {
+    color: #424242;
+    font-weight: 500;
+    font-size: 16;
+}
+
+.area {
+    color: rgba(66, 66, 66, .6);
+    font-weight: 500;
+    font-size: 12;
+}

@@ -1,0 +1,59 @@
+<ion-split-pane when="xs" contentId="main">
+    <ion-menu menuId="menu" contentId="main-content">
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Menu Content</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">This is the menu content.</ion-content>
+    </ion-menu>
+    <ion-content contentId="main-content">
+        <ion-fab slot="fixed" vertical="top" horizontal="start" [edge]="false">
+            <ion-fab-button (click)="openMenu()" style="--background: #FFFFFF;">
+                <ion-icon style="color: #424242;" size="large" name="menu"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+        <capacitor-google-map #map></capacitor-google-map>
+        <ion-modal class="modal" #modal
+            [isOpen]="true"
+            [initialBreakpoint]="0.5"
+            [breakpoints]="[0.25, 0.5, 1]"
+            [backdropDismiss]="false"
+            [backdropBreakpoint]="0.5">
+            <ion-content class="ion-padding">
+                <h1 class="title">Good Morning, {{ user.name }}!</h1>
+                <ion-row class="stats">
+                    <div class="stats-item" style="border-right-color: rgba(0, 0, 0, .1); border-right-width: 1px; border-right-style: solid;">
+                        <label class="stats-value">100km</label>
+                        <label class="stats-title">Charged</label>
+                    </div>
+                    <div class="stats-item" style="border-right-color: rgba(0, 0, 0, .1); border-right-width: 1px; border-right-style: solid;">
+                        <label class="stats-value">$1000</label>
+                        <label class="stats-title">Charged</label>
+                    </div>
+                    <div class="stats-item">
+                        <label class="stats-value">1000</label>
+                        <label class="stats-title">Points</label>
+                    </div>
+                </ion-row>
+                <label class="light-title">Chargers nearby</label>
+                <div style="overflow-y: auto;">
+                    <ion-list class="location-list">
+                        <ion-item class="ion-no-padding" *ngFor="let location of locations" style="--inner-padding-end: 0px; --border-color: rgba(0, 0, 0, .1);">
+                            <ion-icon size="large" style="color: rgba(66, 66, 66, .6);" aria-hidden="true" name="location-outline" slot="start"></ion-icon>
+                            <div class="location">
+                                <div class="location-name">
+                                    <label class="street">{{ location.street }}</label>
+                                    <label class="area">{{ location.area }}</label>
+                                </div>
+                                <div style="display: flex; align-items: center;">
+                                    <label class="distance">{{ location.distance }}</label>
+                                </div>
+                            </div>
+                        </ion-item>
+                    </ion-list>
+                </div>
+            </ion-content>
+        </ion-modal>
+    </ion-content>
+</ion-split-pane>
