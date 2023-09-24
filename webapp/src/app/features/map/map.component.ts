@@ -18,10 +18,8 @@ export class MapComponent implements AfterViewInit {
 
   locations: { street: string, area: string, distance: string }[] = [
     { street: 'Calea București', area: 'Brașov', distance: '3.3km' },
-    { street: 'Calea București', area: 'Brașov', distance: '3.3km' },
-    { street: 'Calea București', area: 'Brașov', distance: '3.3km' },
-    { street: 'Calea București', area: 'Brașov', distance: '3.3km' },
-    { street: 'Calea București', area: 'Brașov', distance: '3.3km' }
+    { street: 'Fundătura roșiorilor', area: 'Brașov', distance: '2.7km' },
+    { street: 'Strada Păltiniș', area: 'Brașov', distance: '5.1km' }
   ];
 
   waypoints: { x: number, y: number, our: boolean }[] = [
@@ -155,18 +153,8 @@ export class MapComponent implements AfterViewInit {
         iconAnchor: new google.maps.Point(23.4, 56.68)
       });
 
-      await this.map.setOnMarkerClickListener((event) => null);
+      await this.map.setOnMarkerClickListener((event) => this.openWaypointModal(event.markerId));
     }
-
-    this.map.setOnMapClickListener((e) => {
-      this.waypoints.push({
-        x: e.latitude,
-        y: e.longitude,
-        our: false
-      });
-
-      console.log(this.waypoints)
-    })
   }
 
   openWaypointModal(id: string): void {
