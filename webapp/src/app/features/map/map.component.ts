@@ -24,8 +24,8 @@ export class MapComponent implements AfterViewInit {
     { street: 'Calea București', area: 'Brașov', distance: '3.3km' }
   ];
 
-  waypoints: { x: number, y: number }[] = [
-    { x: 45.642488, y: 25.592794}
+  waypoints: { x: number, y: number, our: boolean }[] = [
+    { x: 45.642488, y: 25.592794, our: true }
   ]
 
   constructor() { }
@@ -61,7 +61,7 @@ export class MapComponent implements AfterViewInit {
           lat: point.x,
           lng: point.y
         },
-        iconUrl: '../../../assets/pin.png',
+        iconUrl: point.our ? '../../../assets/pin.png' : '../../../assets/pin2.png',
         iconSize: new google.maps.Size(46.8, 56.68),
         iconAnchor: new google.maps.Point(23.4, 56.68)
       });
