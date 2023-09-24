@@ -1,59 +1,185 @@
-<ion-split-pane when="xs" contentId="main">
-    <ion-menu menuId="menu" contentId="main-content">
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Menu Content</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content class="ion-padding">This is the menu content.</ion-content>
-    </ion-menu>
-    <ion-content contentId="main-content">
-        <ion-fab slot="fixed" vertical="top" horizontal="start" [edge]="false">
-            <ion-fab-button (click)="openMenu()" style="--background: #FFFFFF;">
-                <ion-icon style="color: #424242;" size="large" name="menu"></ion-icon>
-            </ion-fab-button>
-        </ion-fab>
-        <capacitor-google-map #map></capacitor-google-map>
-        <ion-modal class="modal" #modal
-            [isOpen]="true"
-            [initialBreakpoint]="0.5"
-            [breakpoints]="[0.25, 0.5, 1]"
-            [backdropDismiss]="false"
-            [backdropBreakpoint]="0.5">
-            <ion-content class="ion-padding">
-                <h1 class="title">Good Morning, {{ user.name }}!</h1>
-                <ion-row class="stats">
-                    <div class="stats-item" style="border-right-color: rgba(0, 0, 0, .1); border-right-width: 1px; border-right-style: solid;">
-                        <label class="stats-value">100km</label>
-                        <label class="stats-title">Charged</label>
-                    </div>
-                    <div class="stats-item" style="border-right-color: rgba(0, 0, 0, .1); border-right-width: 1px; border-right-style: solid;">
-                        <label class="stats-value">$1000</label>
-                        <label class="stats-title">Charged</label>
-                    </div>
-                    <div class="stats-item">
-                        <label class="stats-value">1000</label>
-                        <label class="stats-title">Points</label>
-                    </div>
-                </ion-row>
-                <label class="light-title">Chargers nearby</label>
-                <div style="overflow-y: auto;">
-                    <ion-list class="location-list">
-                        <ion-item class="ion-no-padding" *ngFor="let location of locations" style="--inner-padding-end: 0px; --border-color: rgba(0, 0, 0, .1);">
-                            <ion-icon size="large" style="color: rgba(66, 66, 66, .6);" aria-hidden="true" name="location-outline" slot="start"></ion-icon>
-                            <div class="location">
-                                <div class="location-name">
-                                    <label class="street">{{ location.street }}</label>
-                                    <label class="area">{{ location.area }}</label>
-                                </div>
-                                <div style="display: flex; align-items: center;">
-                                    <label class="distance">{{ location.distance }}</label>
-                                </div>
-                            </div>
-                        </ion-item>
-                    </ion-list>
+<ion-menu
+  (ionWillOpen)="modal2.dismiss(); modal.dismiss(); x = true"
+  (ionWillClose)="modal.present(); x = false"
+  content-id="main-content"
+  #menu
+>
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="display: flex; align-items: center; margin-top: 80px; justify-content: flex-start; gap: .1rem; margin-left: 2rem;">
+            <ion-img style="width: 2rem" src="assets/logo.png"></ion-img>
+            <label class="title" style="font-size: 1.3rem; color: #424242;"><label style="font-weight: 500;">Solar</label><label style="font-weight: 300;">Ride</label></label>
+        </div>
+        <div class="category" style="margin-bottom: 10px; margin-top: 30px;">
+            <ion-img style="width: 2rem" src="assets/account.svg"></ion-img>
+            <div style="display: flex; flex-direction: column; margin-left: 5px;">
+                <label style="font-weight: 600; font-size: 16px; color: #3D4756;">Alex Smith</label>
+                <label style="font-weight: 300; font-style: 11xp; color: #3D4756;">View account</label>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="category" style="margin-bottom: 1.51rem; margin-top: 1rem;">
+            <ion-img style="width: 2rem; margin-right: 1rem;" src="assets/wallet.svg"></ion-img>
+            <label class="title" style="font-size: 1.1rem; color: #424242; font-weight: 500;">Payment</label>
+        </div>
+        <div class="category" style="margin-bottom: 1.5rem;">
+            <ion-img style="width: 2rem; margin-right: 1rem;" src="assets/house.svg"></ion-img>
+            <label class="title" style="font-size: 1.1rem; color: #424242; font-weight: 500;">Store</label>
+        </div>
+        <div class="category" style="margin-bottom: 1rem;">
+            <ion-img style="width: 2rem; margin-right: 1rem;" src="assets/charge.svg"></ion-img>
+            <label class="title" style="font-size: 1.1rem; color: #424242; font-weight: 500;">Your charges</label>
+        </div>
+        <div class="line"></div>
+        <div class="category" style="margin-bottom: 1.51rem; margin-top: 1rem;">
+            <ion-img style="width: 2rem; margin-right: 1rem;" src="assets/settings.svg"></ion-img>
+            <label class="title" style="font-size: 1.1rem; color: #424242; font-weight: 500;">Settings</label>
+        </div>
+        <div class="category" style="margin-bottom: 1.5rem;">
+            <ion-img style="width: 2rem; margin-right: 1rem;" src="assets/help.svg"></ion-img>
+            <label class="title" style="font-size: 1.1rem; color: #424242; font-weight: 500;">Support</label>
+        </div>
+        <div class="category" style="margin-bottom: 1rem;">
+            <ion-img style="width: 2rem; margin-right: 1rem;" src="assets/info.svg"></ion-img>
+            <label class="title" style="font-size: 1.1rem; color: #424242; font-weight: 500;">About</label>
+        </div>
+    </div>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-content>
+    <ion-menu-toggle
+      style="position: fixed; z-index: 10000; left: 20px; top: 20px"
+    >
+      <div
+        style="
+          width: 50px;
+          height: 50px;
+          background: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 100000px;
+          box-shadow: 0 0 20px 0 #00000076;
+        "
+      >
+        <ion-icon name="menu"></ion-icon>
+      </div>
+    </ion-menu-toggle>
+    <capacitor-google-map #map></capacitor-google-map>
+    <ion-modal
+      class="modal"
+      #modal
+      [isOpen]="true"
+      [initialBreakpoint]="0.5"
+      [breakpoints]="[0.25, 0.5, 1]"
+      [backdropDismiss]="false"
+      [backdropBreakpoint]="0.5"
+    >
+      <ion-content class="ion-padding">
+        <h1 class="title">Good Morning, {{ user.name }}!</h1>
+        <ion-row class="stats">
+          <div
+            class="stats-item"
+            style="
+              border-right-color: rgba(0, 0, 0, 0.1);
+              border-right-width: 1px;
+              border-right-style: solid;
+            "
+          >
+            <label class="stats-value">100km</label>
+            <label class="stats-title">Charged</label>
+          </div>
+          <div
+            class="stats-item"
+            style="
+              border-right-color: rgba(0, 0, 0, 0.1);
+              border-right-width: 1px;
+              border-right-style: solid;
+            "
+          >
+            <label class="stats-value">$1000</label>
+            <label class="stats-title">Charged</label>
+          </div>
+          <div class="stats-item">
+            <label class="stats-value">1000</label>
+            <label class="stats-title">Points</label>
+          </div>
+        </ion-row>
+        <label class="light-title">Chargers nearby</label>
+        <div style="overflow-y: auto">
+          <ion-list class="location-list">
+            <ion-item
+              class="ion-no-padding"
+              *ngFor="let location of locations"
+              style="
+                --inner-padding-end: 0px;
+                --border-color: rgba(0, 0, 0, 0.1);
+              "
+            >
+              <ion-icon
+                size="large"
+                style="color: rgba(66, 66, 66, 0.6)"
+                aria-hidden="true"
+                name="location-outline"
+                slot="start"
+              ></ion-icon>
+              <div class="location">
+                <div class="location-name">
+                  <label class="street">{{ location.street }}</label>
+                  <label class="area">{{ location.area }}</label>
                 </div>
-            </ion-content>
-        </ion-modal>
-    </ion-content>
-</ion-split-pane>
+                <div style="display: flex; align-items: center">
+                  <label class="distance">{{ location.distance }}</label>
+                </div>
+              </div>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-content>
+    </ion-modal>
+    <ion-modal
+      class="modal"
+      #modal2
+      [isOpen]="false"
+      [initialBreakpoint]="0.5"
+      [breakpoints]="[0, 0.25, 0.65]"
+      [backdropDismiss]="true"
+      [backdropBreakpoint]="0.5"
+      (willPresent)="modal.dismiss()"
+      (willDismiss)="test2() ? null : modal.present()"
+    >
+      <ion-content class="ion-padding">
+        <h1 class="title">Charging station</h1>
+        <label class="light-title">Location and distance</label>
+        <div style="display: flex; justify-content: space-between;">
+            <div class="location-name" style="justify-content: space-evenly;">
+                <label class="street">Calea Bucuresti 75</label>
+                <label class="area">3.3km</label>
+            </div>
+            <div style="border-radius: 10000px; background: linear-gradient(90deg, #6CEF8C -0.51%, #00B1D4 100%);
+            background: linear-gradient(90deg, color(display-p3 0.5627 0.925 0.5871) -0.51%, color(display-p3 0.2178 0.6839 0.8167) 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 30px 10px 30px;">
+                <img style="color: white; width: 1.5rem;" src="../../../assets/arrow.svg">
+                <label style="color: white; font-size: 12px;">Navigate</label>
+            </div>
+        </div>
+        <h1 class="title" style="color: #2DD36F">Available</h1>
+        <label class="light-title">Station detalis</label>
+        <br>
+        <label class="street">50 kWh remaining</label>
+        <br>
+        <label class="light-title" style="color: rgba(66, 66, 66, .6);">That's about:</label>
+        <ul style="color: rgba(66, 66, 66, .6);">
+            <li><span style="color: #2DD36F">80%</span> of an electric car</li>
+            <li><span style="color: #2DD36F">100%</span> of a hybrid car</li>
+            <li><span style="color: #EB445A">7%</span> of an electric truck</li>
+        </ul>
+        <label class="street" style="font-weight: 500;">Currently producing:</label>
+        <br>
+        <label class="street" style="font-weight: 500;">about 100 kW</label>
+      </ion-content>
+    </ion-modal>
+  </ion-content>
+</div>

@@ -12,7 +12,6 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    IonicModule,
     IonicModule.forRoot()
   ],
   providers: [],

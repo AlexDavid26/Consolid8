@@ -4,8 +4,6 @@ import { RouterModule } from '@angular/router';
 import { MapComponent } from './map.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-
-
 @NgModule({
   declarations: [
     MapComponent
@@ -14,7 +12,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     CommonModule,
     RouterModule.forChild([
       { path: '', component: MapComponent}
-    ])
+    ]),
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -28,6 +28,7 @@ capacitor-google-map {
     background: linear-gradient(90deg, #6BEF8C 0%, #00B1D4 100%);
     background: linear-gradient(90deg, color(display-p3 0.5608 0.9255 0.5882) 0%, color(display-p3 0.2196 0.6824 0.8157) 100%);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -65,4 +66,16 @@ capacitor-google-map {
     color: rgba(66, 66, 66, .6);
     font-weight: 500;
     font-size: 12;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .1rem;
+    margin-left: 2rem; 
+}
+
+.line {
+    width: 80%; border-bottom-style: solid; align-self: center; border-bottom-width: .5px; border-bottom-color: #00000035;
 }
